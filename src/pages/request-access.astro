@@ -5,21 +5,23 @@ const sizes = ['Under 100', '100 to 500', '500 to 2,000', 'Over 2,000'];
 const input = 'mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/15';
 ---
 <Base title="Request access" description="Tell us about your church and we'll set it up on CareConnect.">
-  <section class="bg-gradient-to-b from-brand-soft/70 to-white">
-    <div class="container-page grid gap-12 py-16 sm:py-20 lg:grid-cols-[0.9fr_1.1fr]">
+  <section class="relative overflow-hidden bg-cream">
+    <div aria-hidden="true" class="pointer-events-none absolute -right-40 -top-40 h-[30rem] w-[30rem] rounded-full bg-accent/25 blur-3xl"></div>
+    <div aria-hidden="true" class="pointer-events-none absolute -bottom-48 -left-32 h-[26rem] w-[26rem] rounded-full bg-brand/15 blur-3xl"></div>
+    <div class="container-page relative grid gap-12 py-16 sm:py-24 lg:grid-cols-[0.9fr_1.1fr]">
       <div>
-        <p class="eyebrow">Request access</p>
-        <h1 class="h-display mt-4">Let's set up your church</h1>
-        <p class="lede mt-6">Tell us a little about your church. We reply within a working day, show you CareConnect, and set your church up at its own address.</p>
-        <ul class="mt-8 space-y-4 text-sm">
+        <p class="eyebrow reveal"><span class="rounded-full bg-brand-soft px-3 py-1 normal-case tracking-normal text-brand-dark">Request access</span></p>
+        <h1 class="h-display reveal reveal-delay-1 mt-6">Let's set up your <span class="accent-word">church</span></h1>
+        <p class="lede reveal reveal-delay-2 mt-6">Tell us a little about your church. We reply within a working day, show you CareConnect, and set your church up at its own address.</p>
+        <ul class="reveal reveal-delay-3 mt-10 space-y-5 text-[15px]">
           {['A short call or visit to understand how your church runs', 'Your church set up with its name, logo and colours', 'Your member list brought in from Excel', 'Your team trained, then you are on your way'].map((t, i) => (
-            <li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">{i + 1}</span><span class="pt-1">{t}</span></li>
+            <li class="flex gap-4"><span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent font-display text-lg text-ink">{i + 1}</span><span class="pt-1.5">{t}</span></li>
           ))}
         </ul>
-        <p class="mt-8 text-sm text-ink-soft">Prefer email? <a class="font-semibold text-brand hover:underline" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+        <p class="reveal reveal-delay-3 mt-10 text-sm text-ink-soft">Prefer email? <a class="font-semibold text-brand hover:underline" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
       </div>
 
-      <div class="card flex flex-col justify-center p-6 sm:p-8">
+      <div class="reveal reveal-delay-2 flex flex-col justify-center rounded-[2rem] border border-line bg-white p-6 shadow-[0_30px_60px_-30px_rgba(16,35,42,0.35)] sm:p-10">
         <form id="lead-form" class="grid gap-5 sm:grid-cols-2" novalidate>
           <label class="sm:col-span-2 text-sm font-semibold">Church name
             <input class={input} name="churchName" required maxlength="120" placeholder="e.g. Grace Chapel International" />
@@ -64,7 +66,7 @@ const input = 'mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 te
           <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand-soft text-brand">
             <svg viewBox="0 0 20 20" class="h-7 w-7" fill="currentColor"><path d="M8.2 13.6 4.9 10.3l-1.4 1.4 4.7 4.7 9-9-1.4-1.4z" /></svg>
           </span>
-          <h2 class="mt-4 text-2xl font-extrabold">Thank you</h2>
+          <h2 class="h-card mt-5">Thank you</h2>
           <p class="mt-2 text-ink-soft">We've received your request and will be in touch within a working day.</p>
         </div>
       </div>

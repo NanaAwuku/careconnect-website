@@ -1,8 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
 import FeatureArt from '../components/FeatureArt.astro';
+import Squiggle from '../components/Squiggle.astro';
 import Cta from '../components/Cta.astro';
 import { FEATURES } from '../data/site';
+import { PHOTOS, unsplash } from '../data/images';
+
+const short: Record<string, string> = {
+  members: 'Members', visitors: 'Visitors', attendance: 'Attendance', messages: 'SMS and email',
+  programmes: 'Programmes', outreach: 'Outreach', insight: 'Insight',
+};
+const tint = ['bg-brand-soft', 'bg-accent-soft', 'bg-rose-50', 'bg-sky-50'];
 const roles = [
   ['Senior pastor', 'Growth, attendance and care across the whole church, at a glance.'],
   ['Chapel shepherds', 'Their own chapel: register, birthdays, who is drifting. Nobody else\'s.'],
@@ -11,40 +20,77 @@ const roles = [
 ];
 ---
 <Base title="Features" description="Members and day-born chapels, first-timers and visitation, attendance and check-in, SMS and email, programmes, outreach and an AI assistant.">
-  <section class="bg-gradient-to-b from-brand-soft/70 to-white">
-    <div class="container-page py-16 text-center sm:py-20">
-      <p class="eyebrow">Features</p>
-      <h1 class="h-display mx-auto mt-4 max-w-3xl">Everything a church needs to care for its people</h1>
-      <p class="lede mx-auto mt-6 max-w-2xl">Built with a working church, around how ministry actually happens: chapels and shepherds, Sunday services, visitors, follow-up and programmes.</p>
-      <nav class="mt-8 flex flex-wrap justify-center gap-2" aria-label="Features">
-        {FEATURES.map((f) => <a href={`#${f.id}`} class="rounded-full border border-line bg-white px-4 py-2 text-sm font-medium hover:border-brand hover:text-brand">{f.title.split(',')[0]}</a>)}
-      </nav>
+  <PageHero eyebrow="Features" lede="Built with a working church, around how ministry actually happens: chapels and shepherds, Sunday services, visitors, follow-up and programmes.">
+    Everything a church needs to <span class="accent-word">care</span> for its people
+    <div slot="aside" class="relative">
+      <div class="overflow-hidden rounded-[2.5rem]">
+        <img src={unsplash(PHOTOS.singer.id, 900, 900)} alt={PHOTOS.singer.alt} width="900" height="900" class="h-[26rem] w-full object-cover sm:h-[30rem]" fetchpriority="high" />
+      </div>
+      <div class="absolute -left-3 bottom-10 animate-float rounded-2xl bg-white p-4 shadow-[0_20px_40px_-20px_rgba(16,35,42,0.45)] sm:-left-10">
+        <p class="text-[11px] text-ink-soft">This Sunday</p>
+        <p class="font-display text-3xl font-medium">471</p>
+        <p class="text-[11px] font-semibold text-brand">checked in by QR</p>
+      </div>
+      <div class="absolute -right-3 top-8 animate-float-slow rounded-2xl bg-ink px-4 py-3 text-white shadow-[0_20px_40px_-20px_rgba(16,35,42,0.6)] sm:-right-8">
+        <p class="text-[11px] text-white/60">Second-timer</p>
+        <p class="text-sm font-semibold">Esi Quaye came back</p>
+      </div>
     </div>
-  </section>
-  <section class="py-12 sm:py-16">
-    <div class="container-page space-y-24">
+  </PageHero>
+
+  <!-- Jump to a feature; stays under the header while you read. -->
+  <nav aria-label="Features" class="sticky top-[72px] z-30 border-y border-line bg-white/90 backdrop-blur">
+    <div class="container-page flex gap-2 overflow-x-auto py-3 [scrollbar-width:none]">
+      {FEATURES.map((f) => (
+        <a href={`#${f.id}`} class="shrink-0 rounded-full border border-line px-4 py-2 text-sm font-medium transition hover:-translate-y-0.5 hover:border-brand hover:text-brand">{short[f.id] ?? f.title}</a>
+      ))}
+    </div>
+  </nav>
+
+  <section class="py-20 sm:py-28">
+    <div class="container-page space-y-28 sm:space-y-36">
       {FEATURES.map((f, i) => (
-        <div id={f.id} class="grid scroll-mt-24 items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div class={i % 2 ? 'lg:order-2' : ''}>
-            <h2 class="text-2xl font-extrabold tracking-tight sm:text-3xl">{f.title}</h2>
-            <p class="lede mt-4">{f.summary}</p>
-            <ul class="mt-6 grid gap-3 sm:grid-cols-2">
-              {f.points.map((pt) => <li class="rounded-xl border border-line bg-mist/60 px-4 py-3 text-sm">{pt}</li>)}
+        <div id={f.id} class="grid scroll-mt-40 items-center gap-12 lg:grid-cols-2 lg:gap-20">
+          <div class={`reveal ${i % 2 ? 'lg:order-2' : ''}`}>
+            <p class="eyebrow">{String(i + 1).padStart(2, '0')} / {short[f.id]}</p>
+            <h2 class="h-section mt-4">{f.title}</h2>
+            <p class="lede mt-5">{f.summary}</p>
+            <ul class="mt-8 grid gap-3 sm:grid-cols-2">
+              {f.points.map((pt) => (
+                <li class="flex gap-3 rounded-2xl border border-line bg-white px-4 py-3.5 text-sm transition hover:border-brand/40">
+                  <svg viewBox="0 0 20 20" class="mt-0.5 h-4 w-4 shrink-0 text-brand" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8" /></svg>
+                  <span>{pt}</span>
+                </li>
+              ))}
             </ul>
           </div>
-          <div class={i % 2 ? 'lg:order-1' : ''}><FeatureArt kind={f.id} /></div>
+          <div class={`reveal reveal-delay-2 ${i % 2 ? 'lg:order-1' : ''}`}>
+            <div class={`rounded-[2.5rem] p-6 sm:p-10 ${tint[i % tint.length]}`}>
+              <div class="lift rounded-2xl"><FeatureArt kind={f.id} /></div>
+            </div>
+          </div>
         </div>
       ))}
     </div>
   </section>
-  <section class="bg-mist py-20">
-    <div class="container-page">
-      <h2 class="h-section max-w-2xl">Everyone sees what their role needs</h2>
-      <p class="lede mt-4 max-w-2xl">Your administrators decide who can do what, role by role. A shepherd never sees another chapel's people.</p>
-      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {roles.map(([t, b]) => <div class="card p-6"><h3 class="font-bold">{t}</h3><p class="mt-2 text-sm leading-relaxed text-ink-soft">{b}</p></div>)}
+
+  <section class="relative overflow-hidden bg-ink py-24 text-white">
+    <div aria-hidden="true" class="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-brand/40 blur-3xl"></div>
+    <div class="container-page relative">
+      <p class="eyebrow reveal !text-accent">Made for every role</p>
+      <h2 class="h-section reveal mt-4 max-w-2xl">Everyone sees what <Squiggle><span class="italic text-accent">their role</span></Squiggle> needs</h2>
+      <p class="reveal mt-5 max-w-2xl text-lg text-white/75">Your administrators decide who can do what, role by role. A shepherd never sees another chapel's people.</p>
+      <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {roles.map(([t, b], i) => (
+          <div class={`reveal reveal-delay-${i} rounded-3xl border border-white/10 bg-white/5 p-7 transition duration-300 hover:-translate-y-1 hover:bg-white/10`}>
+            <span class="font-display text-4xl italic text-accent">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="mt-4 text-lg font-semibold">{t}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-white/70">{b}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
-  <div class="pt-20"><Cta /></div>
+
+  <Cta />
 </Base>

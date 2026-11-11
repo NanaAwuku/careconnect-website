@@ -3,25 +3,25 @@ import Logo from './Logo.astro';
 import { NAV } from '../data/site';
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
-<header class="sticky top-0 z-40 border-b border-line/70 bg-white/90 backdrop-blur">
-  <div class="container-page flex h-16 items-center justify-between gap-4">
-    <a href="/" aria-label="CareConnect home"><Logo /></a>
-    <nav class="hidden items-center gap-7 md:flex" aria-label="Main">
+<header id="site-header" class="sticky top-0 z-40 bg-white/85 backdrop-blur-md transition-shadow duration-300 [&.scrolled]:shadow-[0_8px_30px_-18px_rgba(16,35,42,0.35)]">
+  <div class="container-page flex h-[72px] items-center justify-between gap-4">
+    <a href="/" aria-label="CareConnect home" class="transition-opacity hover:opacity-80"><Logo /></a>
+    <nav class="hidden items-center gap-1 md:flex" aria-label="Main">
       {NAV.map((n) => (
-        <a href={n.href} class={`text-sm font-medium transition-colors hover:text-brand ${path === n.href ? 'text-brand' : 'text-ink-soft'}`}>{n.label}</a>
+        <a href={n.href} class={`rounded-full px-4 py-2 text-[15px] font-medium transition-colors hover:bg-mist ${path === n.href ? 'text-brand' : 'text-ink'}`}>{n.label}</a>
       ))}
     </nav>
     <div class="hidden items-center gap-2 md:flex">
-      <a href="/sign-in" class="btn btn-ghost !py-2.5">Sign in</a>
-      <a href="/request-access" class="btn btn-primary !py-2.5">Request access</a>
+      <a href="/sign-in" class="rounded-full px-4 py-2 text-[15px] font-medium hover:bg-mist">Sign in</a>
+      <a href="/request-access" class="btn btn-primary !py-3">Request access <span class="arrow">→</span></a>
     </div>
     <details class="relative md:hidden">
-      <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-lg border border-line" aria-label="Menu">
+      <summary class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-full border border-line" aria-label="Menu">
         <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
       </summary>
-      <div class="absolute right-0 mt-2 w-64 rounded-2xl border border-line bg-white p-3">
-        {NAV.map((n) => <a href={n.href} class="block rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-mist">{n.label}</a>)}
-        <a href="/sign-in" class="block rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-mist">Sign in</a>
+      <div class="absolute right-0 mt-2 w-72 rounded-3xl border border-line bg-white p-3 shadow-[0_24px_48px_-24px_rgba(16,35,42,0.35)]">
+        {NAV.map((n) => <a href={n.href} class="block rounded-2xl px-4 py-3 font-medium hover:bg-mist">{n.label}</a>)}
+        <a href="/sign-in" class="block rounded-2xl px-4 py-3 font-medium hover:bg-mist">Sign in</a>
         <a href="/request-access" class="btn btn-primary mt-2 w-full">Request access</a>
       </div>
     </details>

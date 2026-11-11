@@ -4,26 +4,26 @@ const money = (n: number) => `GHS ${n.toLocaleString('en-GH')}`;
 ---
 <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
   {PLANS.map((p) => (
-    <div class={`relative flex flex-col rounded-2xl border p-6 ${p.highlight ? 'border-brand bg-brand text-white' : 'border-line bg-white'}`}>
-      {p.highlight && <span class="absolute -top-3 left-6 rounded-full bg-accent px-3 py-1 text-xs font-bold text-ink">Recommended</span>}
-      <h3 class="text-lg font-bold">{p.name}</h3>
-      <p class={`text-sm ${p.highlight ? 'text-white/80' : 'text-ink-soft'}`}>{p.forWho}</p>
-      <div class="mt-5">
+    <div class={`lift relative flex flex-col rounded-[2rem] p-7 ${p.highlight ? 'bg-ink text-white' : 'border border-line bg-white'}`}>
+      {p.highlight && <span class="absolute -top-3.5 left-7 rounded-full bg-accent px-3.5 py-1 text-xs font-semibold text-ink">Recommended</span>}
+      <h3 class="font-display text-2xl font-medium">{p.name}</h3>
+      <p class={`mt-1 text-sm ${p.highlight ? 'text-white/70' : 'text-ink-soft'}`}>{p.forWho}</p>
+      <div class="mt-6">
         {p.monthly === null ? (
-          <p class="text-3xl font-extrabold">Let's talk</p>
+          <p class="font-display text-4xl font-medium">Let's talk</p>
         ) : p.monthly === 0 ? (
-          <p class="text-3xl font-extrabold">Free</p>
+          <p class="font-display text-4xl font-medium">Free</p>
         ) : (
-          <p class="text-3xl font-extrabold">{money(p.monthly)}<span class={`text-sm font-medium ${p.highlight ? 'text-white/75' : 'text-ink-soft'}`}> / month</span></p>
+          <p class="font-display text-4xl font-medium">{money(p.monthly)}<span class={`font-sans text-sm font-normal ${p.highlight ? 'text-white/70' : 'text-ink-soft'}`}> / month</span></p>
         )}
-        <p class={`mt-1 text-sm font-medium ${p.highlight ? 'text-white/90' : 'text-brand-dark'}`}>{p.members}</p>
+        <p class={`mt-2 text-sm font-semibold ${p.highlight ? 'text-accent' : 'text-brand'}`}>{p.members}</p>
       </div>
-      <ul class="mt-6 flex-1 space-y-2.5 text-sm">
+      <ul class="mt-7 flex-1 space-y-3 text-sm">
         {p.includes.map((i) => (
-          <li class="flex gap-2.5"><svg viewBox="0 0 20 20" class={`mt-0.5 h-4 w-4 shrink-0 ${p.highlight ? 'text-accent' : 'text-brand'}`} fill="currentColor"><path d="M8.2 13.6 4.9 10.3l-1.4 1.4 4.7 4.7 9-9-1.4-1.4z" /></svg>{i}</li>
+          <li class="flex gap-3"><svg viewBox="0 0 20 20" class={`mt-0.5 h-4 w-4 shrink-0 ${p.highlight ? 'text-accent' : 'text-brand'}`} fill="currentColor"><path d="M8.2 13.6 4.9 10.3l-1.4 1.4 4.7 4.7 9-9-1.4-1.4z" /></svg>{i}</li>
         ))}
       </ul>
-      <a href={`/request-access?plan=${p.id}`} class={`btn mt-7 w-full ${p.highlight ? 'btn-light' : p.monthly === null ? 'btn-ghost' : 'btn-primary'}`}>
+      <a href={`/request-access?plan=${p.id}`} class={`btn mt-8 w-full ${p.highlight ? 'btn-accent' : p.monthly === null ? 'btn-ghost' : 'btn-primary'}`}>
         {p.monthly === null ? 'Talk to us' : p.monthly === 0 ? 'Start free' : 'Request access'}
       </a>
     </div>

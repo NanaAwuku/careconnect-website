@@ -1,0 +1,50 @@
+---
+// Every module, one at a time: pick one on the left, see it on the right. Moves on by itself
+// every few seconds until someone chooses (Base.astro), with a bar showing the time left.
+import FeatureArt from './FeatureArt.astro';
+import { FEATURES } from '../data/site';
+const icons: Record<string, string> = {
+  members: 'M16 11a4 4 0 1 0-8 0M4 20a8 8 0 0 1 16 0',
+  visitors: 'M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z',
+  attendance: 'M4 7h16M4 12h10M4 17h7M17 15l2 2 3-4',
+  messages: 'M4 5h16v11H8l-4 4z',
+  programmes: 'M12 3l9 4-9 4-9-4zM6 9v5c0 1.7 2.7 3 6 3s6-1.3 6-3V9',
+  outreach: 'M12 21s-6-5.3-6-11a6 6 0 0 1 12 0c0 5.7-6 11-6 11zM12 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z',
+  insight: 'M4 19V9M10 19V5M16 19v-7M22 19H2',
+};
+---
+<!-- overflow-anchor: none — as tabs open and close, the browser must not drag the page with them. -->
+<div data-tabs class="[overflow-anchor:none] grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+  <div role="tablist" aria-label="Features" class="space-y-2">
+    {FEATURES.map((f, i) => (
+      <button type="button" role="tab" data-tab id={`tab-${f.id}`} aria-controls={`panel-${f.id}`}
+        class="group block w-full rounded-3xl px-5 py-4 text-left transition-all duration-300 hover:bg-white [&.active]:bg-white [&.active]:shadow-[0_20px_40px_-28px_rgba(16,35,42,0.45)]">
+        <span class="flex items-center gap-4">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white text-ink-soft transition-colors group-[.active]:bg-brand group-[.active]:text-white">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d={icons[f.id]} /></svg>
+          </span>
+          <span class="text-lg font-semibold">{f.title}</span>
+        </span>
+        <span class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 group-[.active]:grid-rows-[1fr]">
+          <span class="overflow-hidden">
+            <span class="block pl-[3.75rem] pt-2 text-ink-soft">{f.summary}</span>
+            <span class="ml-[3.75rem] mt-4 block h-1 overflow-hidden rounded-full bg-mist">
+              <span class="block h-1 w-0 rounded-full bg-accent group-[.active]:animate-[tabprogress_6s_linear_forwards]"></span>
+            </span>
+          </span>
+        </span>
+      </button>
+    ))}
+  </div>
+  <div class="grid">
+    {FEATURES.map((f) => (
+      <div data-panel role="tabpanel" id={`panel-${f.id}`} aria-labelledby={`tab-${f.id}`}
+        class="col-start-1 row-start-1 translate-y-4 scale-[0.98] opacity-0 transition-all duration-500 [&.panel-on]:translate-y-0 [&.panel-on]:scale-100 [&.panel-on]:opacity-100 [&:not(.panel-on)]:pointer-events-none">
+        <FeatureArt kind={f.id} />
+      </div>
+    ))}
+  </div>
+</div>
+<style is:global>
+  @keyframes tabprogress { from { width: 0; } to { width: 100%; } }
+</style>
