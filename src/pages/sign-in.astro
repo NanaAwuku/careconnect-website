@@ -11,7 +11,7 @@ import { SITE } from '../data/site';
         <form id="go" class="mt-6">
           <label class="text-sm font-semibold" for="slug">Your church's web name</label>
           <div class="mt-1.5 flex items-center rounded-xl border border-line focus-within:border-brand focus-within:ring-2 focus-within:ring-brand/15">
-            <input id="slug" name="slug" required autocapitalize="none" autocomplete="off" spellcheck="false" placeholder="gracechapel" class="min-w-0 flex-1 rounded-l-xl bg-transparent px-4 py-3 text-sm outline-none" />
+            <input id="slug" name="slug" required autocapitalize="none" autocomplete="off" spellcheck="false" placeholder="gracechapel" class="min-w-0 flex-1 rounded-l-xl bg-transparent px-4 py-3 text-base outline-none sm:text-sm" />
             <span class="pr-4 text-sm text-ink-soft">.{SITE.appDomain}</span>
           </div>
           <p id="go-error" class="mt-2 hidden text-sm text-rose-700">Use letters, numbers and dashes only.</p>

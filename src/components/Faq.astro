@@ -3,8 +3,8 @@ import { FAQS } from '../data/site';
 ---
 <div class="space-y-3">
   {FAQS.map((f) => (
-    <details class="group rounded-xl border border-line bg-white px-6 py-5 transition-colors open:border-ink">
-      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-semibold">
+    <details class="group rounded-xl border border-line bg-white px-5 py-4 sm:px-6 sm:py-5 transition-colors open:border-ink">
+      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold sm:text-lg">
         {f.q}
         <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-mist text-xl transition-transform duration-300 group-open:rotate-45 group-open:bg-accent">+</span>
       </summary>

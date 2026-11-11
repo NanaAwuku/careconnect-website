@@ -13,7 +13,7 @@ const promises = ['Free under 100 members', 'Priced by church size, never per us
     Simple pricing that grows with you
     <ul slot="after" class="mt-9 flex flex-wrap gap-2">
       {promises.map((p) => (
-        <li class="flex items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-semibold">
+        <li class="flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-[13px] font-semibold sm:px-4 sm:py-2.5 sm:text-sm">
           <svg viewBox="0 0 20 20" class="h-4 w-4 text-brand" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8" /></svg>{p}
         </li>
       ))}
@@ -40,7 +40,7 @@ const promises = ['Free under 100 members', 'Priced by church size, never per us
     </div>
   </section>
 
-  <section id="sms" class="relative scroll-mt-24 overflow-hidden bg-ink py-24 text-white">
+  <section id="sms" class="relative scroll-mt-24 overflow-hidden bg-ink py-16 sm:py-24 text-white">
     <div class="container-page relative grid gap-14 lg:grid-cols-[1fr_1.15fr] lg:items-center">
       <div class="reveal">
         <h2 class="h-section">Email included. SMS when you need it.</h2>
@@ -63,7 +63,7 @@ const promises = ['Free under 100 members', 'Priced by church size, never per us
     </div>
   </section>
 
-  <section class="py-24">
+  <section class="py-16 sm:py-24">
     <div class="container-page grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
       <div class="reveal">
         <h2 class="h-section">About pricing</h2>

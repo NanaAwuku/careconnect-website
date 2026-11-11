@@ -34,14 +34,14 @@ const roles = [
     </div>
   </nav>
 
-  <section class="py-20 sm:py-28">
-    <div class="container-page space-y-28 sm:space-y-36">
+  <section class="py-16 sm:py-28">
+    <div class="container-page space-y-20 sm:space-y-36">
       {FEATURES.map((f, i) => (
-        <div id={f.id} class="grid scroll-mt-40 items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <div id={f.id} class="grid scroll-mt-40 items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-20">
           <div class={`reveal ${i % 2 ? 'lg:order-2' : ''}`}>
             <h2 class="h-section">{f.title}</h2>
             <p class="lede mt-5">{f.summary}</p>
-            <ul class="mt-8 grid gap-3 sm:grid-cols-2">
+            <ul class="mt-6 grid gap-2 sm:mt-8 sm:grid-cols-2 sm:gap-3">
               {f.points.map((pt) => (
                 <li class="flex gap-3 rounded-lg border border-line bg-white px-4 py-3.5 text-sm transition hover:border-brand/40">
                   <svg viewBox="0 0 20 20" class="mt-0.5 h-4 w-4 shrink-0 text-brand" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 10 4 4 8-8" /></svg>
@@ -51,7 +51,7 @@ const roles = [
             </ul>
           </div>
           <div class={`reveal reveal-delay-2 ${i % 2 ? 'lg:order-1' : ''}`}>
-            <div class={`rounded-xl p-6 sm:p-10 ${tint[i % tint.length]}`}>
+            <div class={`rounded-xl p-3 sm:p-10 ${tint[i % tint.length]}`}>
               <div><FeatureArt kind={f.id} /></div>
             </div>
           </div>
@@ -60,7 +60,7 @@ const roles = [
     </div>
   </section>
 
-  <section class="relative overflow-hidden bg-ink py-24 text-white">
+  <section class="relative overflow-hidden bg-ink py-16 sm:py-24 text-white">
     <div class="container-page relative">
       <h2 class="h-section reveal mt-4 max-w-2xl">Everyone sees what their role needs</h2>
       <p class="reveal mt-5 max-w-2xl text-lg text-white/75">Your administrators decide who can do what, role by role. A shepherd never sees another chapel's people.</p>

@@ -18,16 +18,16 @@ const icons: Record<string, string> = {
   <div role="tablist" aria-label="Features" class="space-y-2">
     {FEATURES.map((f, i) => (
       <button type="button" role="tab" data-tab id={`tab-${f.id}`} aria-controls={`panel-${f.id}`}
-        class="group block w-full rounded-xl px-5 py-4 text-left transition-all duration-300 hover:bg-white [&.active]:bg-white">
+        class="group block w-full rounded-xl px-3 py-3 text-left sm:px-5 sm:py-4 transition-all duration-300 hover:bg-white [&.active]:bg-white">
         <span class="flex items-center gap-4">
           <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-white text-ink-soft transition-colors group-[.active]:bg-brand group-[.active]:text-white">
             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d={icons[f.id]} /></svg>
           </span>
-          <span class="text-lg font-semibold">{f.title}</span>
+          <span class="text-base font-semibold sm:text-lg">{f.title}</span>
         </span>
         <span class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 group-[.active]:grid-rows-[1fr]">
           <span class="overflow-hidden">
-            <span class="block pl-[3.75rem] pt-2 text-ink-soft">{f.summary}</span>
+            <span class="block pl-[3.75rem] pt-2 text-[15px] text-ink-soft sm:text-base">{f.summary}</span>
             <span class="ml-[3.75rem] mt-4 block h-1 overflow-hidden rounded-full bg-mist">
               <span class="block h-1 w-0 rounded-full bg-accent group-[.active]:animate-[tabprogress_6s_linear_forwards]"></span>
             </span>
@@ -36,7 +36,7 @@ const icons: Record<string, string> = {
       </button>
     ))}
   </div>
-  <div class="grid">
+  <div class="hidden lg:grid">
     {FEATURES.map((f) => (
       <div data-panel role="tabpanel" id={`panel-${f.id}`} aria-labelledby={`tab-${f.id}`}
         class="col-start-1 row-start-1 translate-y-4 scale-[0.98] opacity-0 transition-all duration-500 [&.panel-on]:translate-y-0 [&.panel-on]:scale-100 [&.panel-on]:opacity-100 [&:not(.panel-on)]:pointer-events-none">
