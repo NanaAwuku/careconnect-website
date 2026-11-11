@@ -1,0 +1,25 @@
+---
+import LegalPage from '../components/LegalPage.astro';
+import { SITE } from '../data/site';
+---
+<LegalPage title="Privacy policy" updated="November 2026">
+  <p>CareConnect provides church management software to churches. This policy explains what personal data is handled, why, and the rights of the people it is about. We follow Ghana's Data Protection Act, 2012 (Act 843).</p>
+  <h2>Who is responsible</h2>
+  <p>Each church decides what it records about its members and visitors, and is the data controller for that information. CareConnect processes it on the church's behalf, only to provide the service. For information about the churches themselves (for example a request for access through this site), CareConnect is the controller.</p>
+  <h2>What is collected</h2>
+  <ul>
+    <li>Member and visitor details a church records: names, contact details, birthdays, attendance, groups, programmes and notes.</li>
+    <li>Accounts of the people who use CareConnect: name, email, phone, role and sign-in activity.</li>
+    <li>Requests made through this website: your church, name, role and contact details.</li>
+  </ul>
+  <h2>Why</h2>
+  <p>To run the service the church has chosen: keeping its records, sending its messages, producing its reports, and securing access. We do not sell personal data, and we do not use it for advertising.</p>
+  <h2>Who else handles it</h2>
+  <p>Trusted providers that host the system and deliver messages (hosting, database, email and SMS providers) process data only on our instructions. A list is available on request.</p>
+  <h2>How long it is kept</h2>
+  <p>For as long as the church uses CareConnect. A church can export its data at any time; when it closes its account, its data is deleted. Activity logs are kept for three months.</p>
+  <h2>Your rights</h2>
+  <p>You may ask to see, correct or delete personal data about you. If you are a member or visitor, contact your church first; it decides what it records. You may also contact us, or the Data Protection Commission of Ghana.</p>
+  <h2>Contact</h2>
+  <p>{SITE.email}, {SITE.city}.</p>
+</LegalPage>

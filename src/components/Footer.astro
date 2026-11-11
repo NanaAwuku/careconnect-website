@@ -1,0 +1,33 @@
+---
+import Logo from './Logo.astro';
+import { SITE } from '../data/site';
+const year = new Date().getFullYear();
+const cols = [
+  { title: 'Product', links: [['/features', 'Features'], ['/pricing', 'Pricing'], ['/security', 'Security'], ['/request-access', 'Request access']] },
+  { title: 'For churches', links: [['/sign-in', 'Sign in to your church'], ['/pricing#sms', 'SMS bundles'], ['/request-access', 'Book a demo']] },
+  { title: 'Legal', links: [['/privacy', 'Privacy'], ['/terms', 'Terms']] },
+];
+---
+<footer class="bg-ink text-white/80">
+  <div class="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_repeat(3,1fr)]">
+    <div class="space-y-4">
+      <Logo light />
+      <p class="max-w-xs text-sm leading-relaxed text-white/70">{SITE.tagline}.</p>
+      <p class="text-sm text-white/70">{SITE.city}<br /><a class="hover:text-white" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+    </div>
+    {cols.map((c) => (
+      <div>
+        <p class="mb-3 text-sm font-semibold text-white">{c.title}</p>
+        <ul class="space-y-2 text-sm">
+          {c.links.map(([href, label]) => <li><a class="hover:text-white" href={href}>{label}</a></li>)}
+        </ul>
+      </div>
+    ))}
+  </div>
+  <div class="border-t border-white/10">
+    <div class="container-page flex flex-col gap-2 py-6 text-xs text-white/50 sm:flex-row sm:justify-between">
+      <p>&copy; {year} CareConnect. All rights reserved.</p>
+      <p>Made in Ghana, for churches across Africa.</p>
+    </div>
+  </div>
+</footer>

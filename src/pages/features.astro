@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import FeatureArt from '../components/FeatureArt.astro';
+import Cta from '../components/Cta.astro';
+import { FEATURES } from '../data/site';
+const roles = [
+  ['Senior pastor', 'Growth, attendance and care across the whole church, at a glance.'],
+  ['Chapel shepherds', 'Their own chapel: register, birthdays, who is drifting. Nobody else\'s.'],
+  ['Visitation team', 'Who is due a visit, who is going, and what happened.'],
+  ['Administrators', 'Members, events, forms, messages and the people who use the system.'],
+];
+---
+<Base title="Features" description="Members and day-born chapels, first-timers and visitation, attendance and check-in, SMS and email, programmes, outreach and an AI assistant.">
+  <section class="bg-gradient-to-b from-brand-soft/70 to-white">
+    <div class="container-page py-16 text-center sm:py-20">
+      <p class="eyebrow">Features</p>
+      <h1 class="h-display mx-auto mt-4 max-w-3xl">Everything a church needs to care for its people</h1>
+      <p class="lede mx-auto mt-6 max-w-2xl">Built with a working church, around how ministry actually happens: chapels and shepherds, Sunday services, visitors, follow-up and programmes.</p>
+      <nav class="mt-8 flex flex-wrap justify-center gap-2" aria-label="Features">
+        {FEATURES.map((f) => <a href={`#${f.id}`} class="rounded-full border border-line bg-white px-4 py-2 text-sm font-medium hover:border-brand hover:text-brand">{f.title.split(',')[0]}</a>)}
+      </nav>
+    </div>
+  </section>
+  <section class="py-12 sm:py-16">
+    <div class="container-page space-y-24">
+      {FEATURES.map((f, i) => (
+        <div id={f.id} class="grid scroll-mt-24 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div class={i % 2 ? 'lg:order-2' : ''}>
+            <h2 class="text-2xl font-extrabold tracking-tight sm:text-3xl">{f.title}</h2>
+            <p class="lede mt-4">{f.summary}</p>
+            <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+              {f.points.map((pt) => <li class="rounded-xl border border-line bg-mist/60 px-4 py-3 text-sm">{pt}</li>)}
+            </ul>
+          </div>
+          <div class={i % 2 ? 'lg:order-1' : ''}><FeatureArt kind={f.id} /></div>
+        </div>
+      ))}
+    </div>
+  </section>
+  <section class="bg-mist py-20">
+    <div class="container-page">
+      <h2 class="h-section max-w-2xl">Everyone sees what their role needs</h2>
+      <p class="lede mt-4 max-w-2xl">Your administrators decide who can do what, role by role. A shepherd never sees another chapel's people.</p>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {roles.map(([t, b]) => <div class="card p-6"><h3 class="font-bold">{t}</h3><p class="mt-2 text-sm leading-relaxed text-ink-soft">{b}</p></div>)}
+      </div>
+    </div>
+  </section>
+  <div class="pt-20"><Cta /></div>
+</Base>

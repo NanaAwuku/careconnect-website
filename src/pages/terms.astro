@@ -1,0 +1,23 @@
+---
+import LegalPage from '../components/LegalPage.astro';
+import { SITE } from '../data/site';
+---
+<LegalPage title="Terms of service" updated="November 2026">
+  <p>These terms are between CareConnect and the church that uses it ("you"). By using CareConnect you agree to them.</p>
+  <h2>The service</h2>
+  <p>CareConnect gives your church its own space to manage its members, visitors, attendance, communication and programmes, at its own address. We keep it running, secure and backed up, and we improve it over time.</p>
+  <h2>Your responsibilities</h2>
+  <ul>
+    <li>Record people's data lawfully and with their knowledge, and keep it accurate.</li>
+    <li>Give access only to people who need it, and keep sign-in details private.</li>
+    <li>Send messages only to people who expect them, and stop when someone asks.</li>
+  </ul>
+  <h2>Payment</h2>
+  <p>Paid plans are billed monthly by card, or ahead by mobile money or bank transfer. If a payment is missed, we remind you; after a grace period your church may be suspended (your data is kept) until it is paid. SMS bundles are used as messages are sent and are not refundable once used.</p>
+  <h2>Your data</h2>
+  <p>Your church's data belongs to your church. You can export it at any time. If you close your account, it is deleted for good. See our <a class="text-brand underline" href="/privacy">privacy policy</a>.</p>
+  <h2>Changes and ending</h2>
+  <p>We will tell you before changing these terms or prices. You may stop at any time; paid periods are not refunded.</p>
+  <h2>Contact</h2>
+  <p>{SITE.email}, {SITE.city}.</p>
+</LegalPage>

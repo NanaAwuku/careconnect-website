@@ -1,0 +1,109 @@
+---
+import Base from '../layouts/Base.astro';
+import { PLANS, SITE } from '../data/site';
+const sizes = ['Under 100', '100 to 500', '500 to 2,000', 'Over 2,000'];
+const input = 'mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 text-sm outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/15';
+---
+<Base title="Request access" description="Tell us about your church and we'll set it up on CareConnect.">
+  <section class="bg-gradient-to-b from-brand-soft/70 to-white">
+    <div class="container-page grid gap-12 py-16 sm:py-20 lg:grid-cols-[0.9fr_1.1fr]">
+      <div>
+        <p class="eyebrow">Request access</p>
+        <h1 class="h-display mt-4">Let's set up your church</h1>
+        <p class="lede mt-6">Tell us a little about your church. We reply within a working day, show you CareConnect, and set your church up at its own address.</p>
+        <ul class="mt-8 space-y-4 text-sm">
+          {['A short call or visit to understand how your church runs', 'Your church set up with its name, logo and colours', 'Your member list brought in from Excel', 'Your team trained, then you are on your way'].map((t, i) => (
+            <li class="flex gap-3"><span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-bold text-white">{i + 1}</span><span class="pt-1">{t}</span></li>
+          ))}
+        </ul>
+        <p class="mt-8 text-sm text-ink-soft">Prefer email? <a class="font-semibold text-brand hover:underline" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+      </div>
+
+      <div class="card flex flex-col justify-center p-6 sm:p-8">
+        <form id="lead-form" class="grid gap-5 sm:grid-cols-2" novalidate>
+          <label class="sm:col-span-2 text-sm font-semibold">Church name
+            <input class={input} name="churchName" required maxlength="120" placeholder="e.g. Grace Chapel International" />
+          </label>
+          <label class="text-sm font-semibold">Your name
+            <input class={input} name="contactName" required maxlength="100" autocomplete="name" />
+          </label>
+          <label class="text-sm font-semibold">Your role
+            <input class={input} name="role" maxlength="80" placeholder="e.g. Administrator, Pastor" />
+          </label>
+          <label class="text-sm font-semibold">Email
+            <input class={input} name="email" type="email" required maxlength="160" autocomplete="email" />
+          </label>
+          <label class="text-sm font-semibold">Phone or WhatsApp
+            <input class={input} name="phone" type="tel" required maxlength="30" autocomplete="tel" placeholder="024 000 0000" />
+          </label>
+          <label class="text-sm font-semibold">City
+            <input class={input} name="city" maxlength="80" placeholder="e.g. Kumasi" />
+          </label>
+          <label class="text-sm font-semibold">Members
+            <select class={input} name="size" required>
+              <option value="">Choose</option>
+              {sizes.map((s) => <option value={s}>{s}</option>)}
+            </select>
+          </label>
+          <label class="sm:col-span-2 text-sm font-semibold">Plan you're interested in
+            <select class={input} name="plan">
+              <option value="">Not sure yet</option>
+              {PLANS.map((p) => <option value={p.id}>{p.name}</option>)}
+            </select>
+          </label>
+          <label class="sm:col-span-2 text-sm font-semibold">Anything we should know?
+            <textarea class={`${input} min-h-28`} name="message" maxlength="2000" placeholder="How you keep records today, what you'd like help with…"></textarea>
+          </label>
+          <!-- A field people never see: bots fill it in, and their request is quietly dropped. -->
+          <label class="hidden" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off" /></label>
+          <p id="lead-error" role="alert" class="hidden sm:col-span-2 rounded-xl bg-rose-50 px-4 py-3 text-sm text-rose-700"></p>
+          <button type="submit" class="btn btn-primary sm:col-span-2">Send request</button>
+          <p class="sm:col-span-2 text-xs text-ink-soft">We use these details only to reply to you. See our <a class="underline" href="/privacy">privacy policy</a>.</p>
+        </form>
+        <div id="lead-done" class="hidden py-10 text-center">
+          <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand-soft text-brand">
+            <svg viewBox="0 0 20 20" class="h-7 w-7" fill="currentColor"><path d="M8.2 13.6 4.9 10.3l-1.4 1.4 4.7 4.7 9-9-1.4-1.4z" /></svg>
+          </span>
+          <h2 class="mt-4 text-2xl font-extrabold">Thank you</h2>
+          <p class="mt-2 text-ink-soft">We've received your request and will be in touch within a working day.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script define:vars={{ api: SITE.apiUrl, email: SITE.email }}>
+  const form = document.getElementById('lead-form');
+  const error = document.getElementById('lead-error');
+  const done = document.getElementById('lead-done');
+  const plan = new URLSearchParams(location.search).get('plan');
+  if (plan) form.elements.plan.value = plan;
+
+  const show = (msg) => { error.textContent = msg; error.classList.remove('hidden'); };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    error.classList.add('hidden');
+    const data = Object.fromEntries(new FormData(form).entries());
+    const missing = [['churchName', 'your church\'s name'], ['contactName', 'your name'], ['email', 'your email'], ['phone', 'a phone number'], ['size', 'how many members you have']]
+      .filter(([k]) => !String(data[k] || '').trim()).map(([, label]) => label);
+    const list = (xs) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')} and ${xs[xs.length - 1]}` : xs[0]);
+    if (missing.length) return show(`Please add ${list(missing)}.`);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(data.email))) return show('Please check your email address.');
+
+    const button = form.querySelector('button[type=submit]');
+    button.disabled = true;
+    button.textContent = 'Sending…';
+    try {
+      const res = await fetch(`${api}/api/leads`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(body.message || 'Something went wrong.');
+      form.classList.add('hidden');
+      done.classList.remove('hidden');
+    } catch (err) {
+      show(`${err.message} You can also email us at ${email}.`);
+      button.disabled = false;
+      button.textContent = 'Send request';
+    }
+  });
+</script>

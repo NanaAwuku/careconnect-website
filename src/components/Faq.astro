@@ -1,0 +1,14 @@
+---
+import { FAQS } from '../data/site';
+---
+<div class="divide-y divide-line rounded-2xl border border-line">
+  {FAQS.map((f) => (
+    <details class="group px-6 py-5">
+      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">
+        {f.q}
+        <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line text-ink-soft transition-transform group-open:rotate-45">+</span>
+      </summary>
+      <p class="mt-3 text-sm leading-relaxed text-ink-soft">{f.a}</p>
+    </details>
+  ))}
+</div>

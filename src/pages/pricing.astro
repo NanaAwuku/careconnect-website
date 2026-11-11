@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import PlanCards from '../components/PlanCards.astro';
+import Faq from '../components/Faq.astro';
+import { PLANS, SMS_BUNDLES } from '../data/site';
+const paid = PLANS.filter((p) => p.monthly);
+---
+<Base title="Pricing" description="CareConnect pricing in cedis: free for churches under 100 members, then by the size of your church. SMS bundles priced per unit.">
+  <section class="bg-gradient-to-b from-brand-soft/70 to-white">
+    <div class="container-page py-16 text-center sm:py-20">
+      <p class="eyebrow">Pricing</p>
+      <h1 class="h-display mx-auto mt-4 max-w-3xl">Simple pricing, in cedis</h1>
+      <p class="lede mx-auto mt-6 max-w-2xl">Free for small churches. After that you pay by the size of your congregation, never per user. Pay monthly by card, or a year ahead by mobile money and get two months free.</p>
+    </div>
+  </section>
+  <section class="pb-20">
+    <div class="container-page">
+      <PlanCards />
+      <div class="mt-8 rounded-2xl border border-line bg-mist p-6 text-sm">
+        <p class="font-semibold">Paying a year ahead</p>
+        <p class="mt-1 text-ink-soft">
+          {paid.map((p, i) => <>{p.name}: <b class="text-ink">GHS {((p.monthly ?? 0) * 10).toLocaleString('en-GH')}</b> a year{i < paid.length - 1 ? ', ' : '.'}</>)}
+          {' '}Mobile money, bank transfer or card.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section id="sms" class="scroll-mt-24 bg-mist py-20">
+    <div class="container-page grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+      <div>
+        <p class="eyebrow">SMS bundles</p>
+        <h2 class="h-section mt-3">Pay only for the messages you send</h2>
+        <p class="lede mt-4">Buy SMS units in cedis and top up whenever you like. Every message is counted against your church, and you can see exactly where they went. Large churches can connect their own SMS account instead.</p>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-3">
+        {SMS_BUNDLES.map((b) => (
+          <div class="card p-6 text-center">
+            <p class="text-3xl font-extrabold">{b.units.toLocaleString('en-GH')}</p>
+            <p class="text-sm text-ink-soft">SMS units</p>
+            <p class="mt-4 text-lg font-bold text-brand-dark">GHS {b.price.toLocaleString('en-GH')}</p>
+            <p class="text-xs text-ink-soft">GHS {(b.price / b.units).toFixed(3)} each</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="py-20">
+    <div class="container-page grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+      <div><h2 class="h-section">Questions about pricing</h2><p class="mt-4 text-ink-soft">Prices shown are our launch prices.</p></div>
+      <Faq />
+    </div>
+  </section>
+</Base>

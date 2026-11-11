@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+const items = [
+  ['Every church kept apart', 'Each church has its own address, its own people and its own records. Every request is limited to the church it belongs to, and this is tested on both sides, so one church can never see another\'s members, messages or reports.'],
+  ['Roles decide who sees what', 'Administrators give each role exactly what it needs. Chapel shepherds see only their chapel; pastor-only notes stay with the pastors.'],
+  ['Every change is logged', 'Who added, changed or removed what, and when, in an activity log your administrators can read.'],
+  ['Sign-in that is hard to abuse', 'Passwords are never stored, only their hashes. Accounts lock after repeated failed attempts, and set-up links work once and expire within a day.'],
+  ['Keys and secrets encrypted', 'The credentials a church brings, like its SMS account key, are encrypted at rest and never shown again, not even to us.'],
+  ['Your data is yours', 'Export everything your church owns at any time. When you close your account, it is deleted for good.'],
+];
+---
+<Base title="Security" description="How CareConnect keeps each church's data separate, private and in its own hands.">
+  <section class="bg-gradient-to-b from-brand-soft/70 to-white">
+    <div class="container-page py-16 text-center sm:py-20">
+      <p class="eyebrow">Security and privacy</p>
+      <h1 class="h-display mx-auto mt-4 max-w-3xl">Your church's people are in safe hands</h1>
+      <p class="lede mx-auto mt-6 max-w-2xl">A church trusts us with its members' names, phone numbers, families and prayer requests. Here is how we look after them.</p>
+    </div>
+  </section>
+  <section class="pb-20">
+    <div class="container-page grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {items.map(([t, b]) => (
+        <div class="card p-6">
+          <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-soft text-brand-dark">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.4 3.4 8.2 8 9 4.6-.8 8-4.6 8-9V6z" /><path d="m9 12 2 2 4-4" /></svg>
+          </span>
+          <h2 class="mt-4 text-lg font-bold">{t}</h2>
+          <p class="mt-2 text-sm leading-relaxed text-ink-soft">{b}</p>
+        </div>
+      ))}
+    </div>
+    <div class="container-page mt-10">
+      <p class="rounded-2xl border border-line bg-mist p-6 text-sm text-ink-soft">
+        CareConnect is operated from Ghana and follows the Data Protection Act, 2012 (Act 843). Read our <a class="font-semibold text-brand hover:underline" href="/privacy">privacy policy</a>.
+      </p>
+    </div>
+  </section>
+  <Cta />
+</Base>

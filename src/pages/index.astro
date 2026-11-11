@@ -1,0 +1,137 @@
+---
+import Base from '../layouts/Base.astro';
+import FeatureArt from '../components/FeatureArt.astro';
+import PlanCards from '../components/PlanCards.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import { FEATURES, STEPS } from '../data/site';
+
+const problems = [
+  { t: 'People slip away unnoticed', b: 'Someone misses three Sundays and nobody knows. CareConnect notices, and your visitation team sees who to call.' },
+  { t: 'First-timers never come back', b: 'Visitors are welcomed, recorded once and followed up, so a second visit becomes a member.' },
+  { t: 'Records live in ten spreadsheets', b: 'Members, chapels, attendance, programmes and messages, in one place everyone trusts.' },
+];
+const featured = FEATURES.slice(0, 4);
+---
+<Base>
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div aria-hidden="true" class="absolute inset-x-0 top-0 -z-10 h-[38rem] bg-gradient-to-b from-brand-soft/70 to-white"></div>
+    <div class="container-page grid items-center gap-12 pb-16 pt-14 sm:pt-20 lg:grid-cols-[1.05fr_1fr] lg:pb-24">
+      <div>
+        <p class="eyebrow">Church management for Africa</p>
+        <h1 class="h-display mt-4 lg:text-[3.6rem]">Know every member.<br /><span class="text-brand">Follow up every visitor.</span></h1>
+        <p class="lede mt-6 max-w-xl">
+          CareConnect is built for how African churches actually run: day-born chapels and shepherds, first-timers and
+          visitation, attendance, programmes, and SMS that reaches everyone. One simple system, ready in a day.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/request-access" class="btn btn-primary">Request access</a>
+          <a href="/features" class="btn btn-ghost">See what it does</a>
+        </div>
+        <ul class="mt-8 grid gap-2 text-sm text-ink-soft sm:grid-cols-2">
+          {['Your own address: yourchurch.careconnect.com', 'Free for churches under 100 members', 'Pay by card or mobile money', 'Your data is yours, always exportable'].map((t) => (
+            <li class="flex gap-2"><svg viewBox="0 0 20 20" class="mt-0.5 h-4 w-4 shrink-0 text-brand" fill="currentColor"><path d="M8.2 13.6 4.9 10.3l-1.4 1.4 4.7 4.7 9-9-1.4-1.4z" /></svg>{t}</li>
+          ))}
+        </ul>
+      </div>
+      <FeatureArt kind="hero" />
+    </div>
+  </section>
+
+  <!-- Problems -->
+  <section class="bg-mist py-20">
+    <div class="container-page">
+      <div class="max-w-2xl">
+        <p class="eyebrow">Why churches switch</p>
+        <h2 class="h-section mt-3">Care that doesn't depend on someone remembering</h2>
+      </div>
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        {problems.map((p, i) => (
+          <div class="card p-6">
+            <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-soft text-sm font-extrabold text-brand-dark">{i + 1}</span>
+            <h3 class="mt-4 text-lg font-bold">{p.t}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-soft">{p.b}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-20 sm:py-24">
+    <div class="container-page space-y-24">
+      {featured.map((f, i) => (
+        <div class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div class={i % 2 ? 'lg:order-2' : ''}>
+            <h2 class="text-2xl font-extrabold tracking-tight sm:text-3xl">{f.title}</h2>
+            <p class="lede mt-4">{f.summary}</p>
+            <ul class="mt-6 space-y-3">
+              {f.points.map((pt) => (
+                <li class="flex gap-3 text-sm"><svg viewBox="0 0 20 20" class="mt-0.5 h-4 w-4 shrink-0 text-brand" fill="currentColor"><path d="M8.2 13.6 4.9 10.3l-1.4 1.4 4.7 4.7 9-9-1.4-1.4z" /></svg><span>{pt}</span></li>
+              ))}
+            </ul>
+          </div>
+          <div class={i % 2 ? 'lg:order-1' : ''}><FeatureArt kind={f.id} /></div>
+        </div>
+      ))}
+      <div class="text-center">
+        <a href="/features" class="btn btn-ghost">And programmes, outreach and the AI assistant</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="bg-ink py-20 text-white">
+    <div class="container-page">
+      <p class="eyebrow !text-accent">How it works</p>
+      <h2 class="h-section mt-3 max-w-2xl">From request to your first Sunday on CareConnect</h2>
+      <ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {STEPS.map((s, i) => (
+          <li class="rounded-2xl border border-white/10 bg-white/5 p-6">
+            <span class="text-sm font-bold text-accent">Step {i + 1}</span>
+            <h3 class="mt-2 text-lg font-bold">{s.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-white/70">{s.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="py-20 sm:py-24">
+    <div class="container-page">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Pricing</p>
+        <h2 class="h-section mt-3">Priced in cedis, by the size of your church</h2>
+        <p class="lede mt-4">Start free. Move up when you grow. Pay a year ahead and get two months free.</p>
+      </div>
+      <div class="mt-12"><PlanCards /></div>
+    </div>
+  </section>
+
+  <!-- Security band -->
+  <section class="bg-mist py-16">
+    <div class="container-page grid items-center gap-8 lg:grid-cols-[1fr_auto]">
+      <div>
+        <h2 class="text-2xl font-extrabold tracking-tight">Your church's data stays your church's</h2>
+        <p class="mt-2 max-w-2xl text-ink-soft">Every church has its own address, its own people and its own records, kept apart on every request. Roles decide who sees what, every change is logged, and you can export everything at any time.</p>
+      </div>
+      <a href="/security" class="btn btn-ghost">How we protect it</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 sm:py-24">
+    <div class="container-page grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+      <div>
+        <p class="eyebrow">Questions</p>
+        <h2 class="h-section mt-3">What churches ask us</h2>
+        <p class="mt-4 text-ink-soft">Something else? <a class="font-semibold text-brand hover:underline" href="/request-access">Ask us directly</a>.</p>
+      </div>
+      <Faq />
+    </div>
+  </section>
+
+  <Cta />
+</Base>
