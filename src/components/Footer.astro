@@ -17,7 +17,7 @@ const cols = [
     <div class="space-y-4">
       <Logo light />
       <p class="max-w-xs text-sm leading-relaxed text-white/70">{SITE.tagline}.</p>
-      <p class="text-sm text-white/70">{SITE.city}<br /><a class="hover:text-white" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
+      <p class="text-sm text-white/70"><a class="hover:text-white" href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
     </div>
     {cols.map((c) => (
       <div>
@@ -31,7 +31,7 @@ const cols = [
   <div class="border-t border-white/10">
     <div class="container-page flex flex-col gap-2 py-6 text-xs text-white/50 sm:flex-row sm:justify-between">
       <p>&copy; {year} CareConnect. All rights reserved.</p>
-      <p>Made in Ghana, for churches across Africa.</p>
+      <p>For churches everywhere.</p>
     </div>
   </div>
 </footer>

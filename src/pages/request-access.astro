@@ -33,10 +33,10 @@ const input = 'mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 te
             <input class={input} name="email" type="email" required maxlength="160" autocomplete="email" />
           </label>
           <label class="text-sm font-semibold">Phone or WhatsApp
-            <input class={input} name="phone" type="tel" required maxlength="30" autocomplete="tel" placeholder="024 000 0000" />
+            <input class={input} name="phone" type="tel" required maxlength="30" autocomplete="tel" placeholder="With country code" />
           </label>
-          <label class="text-sm font-semibold">City
-            <input class={input} name="city" maxlength="80" placeholder="e.g. Kumasi" />
+          <label class="text-sm font-semibold">City and country
+            <input class={input} name="city" maxlength="80" placeholder="e.g. Nairobi, Kenya" />
           </label>
           <label class="text-sm font-semibold">Members
             <select class={input} name="size" required>

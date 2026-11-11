@@ -1,6 +1,6 @@
 ---
 import { PLANS } from '../data/site';
-const money = (n: number) => `GHS ${n.toLocaleString('en-GH')}`;
+const money = (n: number) => `$${n.toLocaleString('en-US')}`;
 ---
 <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
   {PLANS.map((p) => (

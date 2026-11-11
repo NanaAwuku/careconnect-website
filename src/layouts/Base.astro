@@ -63,7 +63,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       document.querySelectorAll<HTMLElement>('[data-live]').forEach((el) => {
         if (reduce) return;
         let n = Number(el.dataset.live);
-        setInterval(() => { n += 1 + Math.floor(Math.random() * 3); el.textContent = n.toLocaleString('en-GH'); }, 1800);
+        setInterval(() => { n += 1 + Math.floor(Math.random() * 3); el.textContent = n.toLocaleString('en-US'); }, 1800);
       });
 
       // Counters count up once visible.
@@ -73,11 +73,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           const el = e.target as HTMLElement;
           const to = Number(el.dataset.count);
           countIo.unobserve(el);
-          if (reduce) { el.textContent = to.toLocaleString('en-GH'); continue; }
+          if (reduce) { el.textContent = to.toLocaleString('en-US'); continue; }
           const start = performance.now();
           const tick = (t: number) => {
             const p = Math.min(1, (t - start) / 1400);
-            el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))).toLocaleString('en-GH');
+            el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))).toLocaleString('en-US');
             if (p < 1) requestAnimationFrame(tick);
           };
           requestAnimationFrame(tick);

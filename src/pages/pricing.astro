@@ -3,14 +3,14 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import PlanCards from '../components/PlanCards.astro';
 import Faq from '../components/Faq.astro';
-import { PLANS, SMS_BUNDLES } from '../data/site';
+import { PLANS } from '../data/site';
 import { PHOTOS, unsplash } from '../data/images';
 const paid = PLANS.filter((p) => p.monthly);
-const promises = ['Free under 100 members', 'Priced by church size, never per user', 'Two months free when you pay yearly', 'Mobile money, bank or card'];
+const promises = ['Free under 100 members', 'Priced by church size, never per user', 'Two months free when you pay yearly', 'Card, bank transfer or mobile money'];
 ---
-<Base title="Pricing" description="CareConnect pricing in cedis: free for churches under 100 members, then by the size of your church. SMS bundles priced per unit.">
-  <PageHero tone="gold" lede="Free for small churches. After that you pay by the size of your congregation, never per user. Pay monthly by card, or a year ahead by mobile money and get two months free.">
-    Simple pricing, in cedis
+<Base title="Pricing" description="CareConnect pricing: free for churches under 100 members, then by the size of your church. SMS bundles priced per unit.">
+  <PageHero tone="gold" lede="Free for small churches. After that you pay by the size of your congregation, never per user. Pay monthly by card, or a year ahead and get two months free.">
+    Simple pricing that grows with you
     <ul slot="after" class="mt-9 flex flex-wrap gap-2">
       {promises.map((p) => (
         <li class="flex items-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-semibold">
@@ -26,13 +26,13 @@ const promises = ['Free under 100 members', 'Priced by church size, never per us
       <div class="reveal mt-8 flex flex-col gap-4 rounded-xl bg-accent-soft p-7 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p class="font-display text-2xl font-extrabold tracking-[-0.03em]">Paying a year ahead?</p>
-          <p class="mt-1 text-sm text-ink-soft">A year costs the price of ten months. Mobile money, bank transfer or card.</p>
+          <p class="mt-1 text-sm text-ink-soft">A year costs the price of ten months. Card, bank transfer or mobile money.</p>
         </div>
         <div class="flex flex-wrap gap-3">
           {paid.map((p) => (
             <div class="rounded-lg bg-white px-5 py-3">
               <p class="text-xs text-ink-soft">{p.name}, a year</p>
-              <p class="font-display text-xl font-extrabold tracking-[-0.03em]">GHS {((p.monthly ?? 0) * 10).toLocaleString('en-GH')}</p>
+              <p class="font-display text-xl font-extrabold tracking-[-0.03em]">${((p.monthly ?? 0) * 10).toLocaleString('en-US')}</p>
             </div>
           ))}
         </div>
@@ -43,17 +43,20 @@ const promises = ['Free under 100 members', 'Priced by church size, never per us
   <section id="sms" class="relative scroll-mt-24 overflow-hidden bg-ink py-24 text-white">
     <div class="container-page relative grid gap-14 lg:grid-cols-[1fr_1.15fr] lg:items-center">
       <div class="reveal">
-        <h2 class="h-section">Pay only for the messages you send</h2>
-        <p class="mt-5 text-lg text-white/75">Buy SMS units in cedis and top up whenever you like. Every message is counted against your church, and you can see exactly where it went. Large churches can connect their own SMS account instead.</p>
+        <h2 class="h-section">Email included. SMS when you need it.</h2>
+        <p class="mt-5 text-lg text-white/75">Email to your whole church is part of every paid plan. SMS is pay-as-you-go: buy credit, top up whenever you like, and see exactly where every message went.</p>
         <img src={unsplash(PHOTOS.phone.id, 900, 520)} alt={PHOTOS.phone.alt} loading="lazy" class="mt-10 hidden h-56 w-full rounded-xl object-cover lg:block" />
       </div>
       <div class="grid gap-4 sm:grid-cols-3">
-        {SMS_BUNDLES.map((b, i) => (
-          <div class={`reveal reveal-delay-${i + 1} rounded-xl p-7 text-center transition duration-300 ${i === 1 ? 'bg-accent text-ink' : 'border border-white/10 bg-white/5 hover:bg-white/10'}`}>
-            <p class="font-display text-4xl font-extrabold tracking-[-0.03em]">{b.units.toLocaleString('en-GH')}</p>
-            <p class={`text-sm ${i === 1 ? 'text-ink/70' : 'text-white/60'}`}>SMS units</p>
-            <p class="mt-6 text-xl font-semibold">GHS {b.price.toLocaleString('en-GH')}</p>
-            <p class={`text-xs ${i === 1 ? 'text-ink/70' : 'text-white/60'}`}>GHS {(b.price / b.units).toFixed(3)} each</p>
+        {[
+          ['Email', 'Included', 'On every paid plan, to members, groups and visitors.'],
+          ['SMS credit', 'Pay as you go', 'Priced per message at your country\'s rates. Live in Ghana now, more countries on the way.'],
+          ['Your own provider', 'Large churches', 'Connect your own SMS account and send at your own rates.'],
+        ].map(([t, big, body], i) => (
+          <div class={`reveal reveal-delay-${i + 1} rounded-xl p-7 ${i === 0 ? 'bg-accent text-ink' : 'border border-white/10 bg-white/5'}`}>
+            <p class={`text-sm font-semibold ${i === 0 ? 'text-ink/70' : 'text-white/60'}`}>{t}</p>
+            <p class="mt-2 font-display text-2xl font-extrabold tracking-[-0.03em]">{big}</p>
+            <p class={`mt-4 text-sm leading-relaxed ${i === 0 ? 'text-ink/75' : 'text-white/70'}`}>{body}</p>
           </div>
         ))}
       </div>

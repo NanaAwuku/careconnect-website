@@ -6,9 +6,9 @@ const { kind } = Astro.props;
 
 const people = [
   { n: 'Ama Owusu', c: 'Shepherd, Monday-January', i: 'AO', t: 'bg-brand-soft text-brand-dark' },
-  { n: 'Kwame Mensah', c: 'Choir', i: 'KM', t: 'bg-accent-soft text-amber-800' },
+  { n: 'David Okafor', c: 'Choir', i: 'DO', t: 'bg-accent-soft text-amber-800' },
   { n: 'Efua Boateng', c: 'Ushering', i: 'EB', t: 'bg-sky-50 text-sky-800' },
-  { n: 'Kojo Asante', c: 'Youth ministry', i: 'KA', t: 'bg-rose-50 text-rose-800' },
+  { n: 'Sarah Johnson', c: 'Youth ministry', i: 'SJ', t: 'bg-rose-50 text-rose-800' },
 ];
 ---
 <div class="relative">
@@ -114,7 +114,7 @@ const people = [
 
       {kind === 'outreach' && (
         <div class="space-y-2">
-          <div class="flex items-center justify-between"><p class="text-sm font-bold">Campus outreach, KNUST</p><span class="text-[10px] text-ink-soft">186 reached</span></div>
+          <div class="flex items-center justify-between"><p class="text-sm font-bold">Campus outreach, City University</p><span class="text-[10px] text-ink-soft">186 reached</span></div>
           {[['Group A, Unity Hall', 'Pastor Eric', 42], ['Group B, Republic Hall', 'Sis. Adwoa', 38], ['Group C, Africa Hall', 'Bro. Nana', 51]].map(([g, f, n]) => (
             <div class="flex items-center justify-between rounded-xl border border-line px-3 py-2.5"><div><p class="text-xs font-semibold">{g}</p><p class="text-[10px] text-ink-soft">Facilitator: {f}</p></div><span class="text-xs font-bold">{n}</span></div>
           ))}

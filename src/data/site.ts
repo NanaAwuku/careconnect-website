@@ -4,12 +4,11 @@
 
 export const SITE = {
   name: 'CareConnect',
-  tagline: 'Church management built for how African churches run',
+  tagline: 'Church management for every member and every visitor',
   description:
-    'CareConnect helps churches know every member, follow up every visitor and reach everyone by SMS and email. Day-born chapels, shepherds, first-timers, visitation, attendance and programmes in one simple system.',
+    'CareConnect helps churches know every member, follow up every visitor and reach everyone by SMS and email. Members and groups, first-timers and visitation, attendance, events and programmes in one simple system.',
   email: 'hello@careconnect.com',
   phone: '+233 00 000 0000',
-  city: 'Accra, Ghana',
   /** Where churches sign in: <their web name>.<appDomain> */
   appDomain: 'careconnect.com',
   /** The backend's public URL, for the request-access form. */
@@ -26,14 +25,14 @@ export type Plan = {
   id: string;
   name: string;
   forWho: string;
-  /** GHS per month; null = talk to us */
+  /** US dollars per month; null = talk to us */
   monthly: number | null;
   members: string;
   highlight?: boolean;
   includes: string[];
 };
 
-/** Launch prices in cedis — placeholders to confirm before going public. Annual = 10 months. */
+/** Launch prices in US dollars — placeholders to confirm before going public. Annual = 10 months. */
 export const PLANS: Plan[] = [
   {
     id: 'free',
@@ -41,13 +40,13 @@ export const PLANS: Plan[] = [
     forWho: 'Small churches and new plants',
     monthly: 0,
     members: 'Up to 100 members',
-    includes: ['Members and day-born chapels', 'Attendance and headcounts', 'First-timer registration', '1 admin'],
+    includes: ['Members, groups and chapels', 'Attendance and headcounts', 'First-timer registration', '1 admin'],
   },
   {
     id: 'growth',
     name: 'Growth',
     forWho: 'Growing churches',
-    monthly: 350,
+    monthly: 29,
     members: 'Up to 500 members',
     includes: ['Everything in Starter', 'Visitation and follow-up', 'Forms, events and registrations', 'Groups and ministries', 'SMS and email', '5 admins'],
   },
@@ -55,7 +54,7 @@ export const PLANS: Plan[] = [
     id: 'church',
     name: 'Church',
     forWho: 'Established congregations',
-    monthly: 850,
+    monthly: 69,
     members: 'Up to 2,000 members',
     highlight: true,
     includes: ['Everything in Growth', 'Programmes and certificates', 'Outreach campaigns', 'Lobby kiosk check-in', 'AI assistant and analytics', 'Your own domain', 'Unlimited admins'],
@@ -70,20 +69,14 @@ export const PLANS: Plan[] = [
   },
 ];
 
-export const SMS_BUNDLES = [
-  { units: 1000, price: 45 },
-  { units: 5000, price: 200 },
-  { units: 20000, price: 720 },
-];
-
 export type Feature = { id: string; title: string; summary: string; points: string[] };
 
 export const FEATURES: Feature[] = [
   {
     id: 'members',
-    title: 'Members and day-born chapels',
-    summary: 'Members are placed in their day-born chapel and mini chapel from their birthday, with a member ID your church recognises.',
-    points: ['84 mini chapels, worked out automatically', 'Chapel shepherds see only their own people', 'Import from Excel, with columns matched for you', 'Family, ministries, groups and life events'],
+    title: 'Members, groups and chapels',
+    summary: 'Every member in the right group, cell or chapel, with a member ID your church recognises. Leaders see only their own people.',
+    points: ['Groups, cells, ministries and chapels', 'Leaders see only their own people', 'Import from Excel, with columns matched for you', 'Family, ministries, groups and life events'],
   },
   {
     id: 'visitors',
@@ -133,8 +126,8 @@ export const STEPS = [
 export const FAQS = [
   { q: 'Is our data separate from other churches?', a: 'Yes. Every church has its own address, its own people and its own data. No church can see another church\'s members, messages or reports — this is enforced on every request, and tested.' },
   { q: 'Can we use our own domain?', a: 'Yes. Every church gets yourchurch.careconnect.com straight away, and on the Church plan you can also use your own domain, like app.yourchurch.org.' },
-  { q: 'How do we pay?', a: 'Monthly by card, or by mobile money or bank transfer for 1, 3, 6 or 12 months ahead. Paying for a year costs the price of 10 months.' },
-  { q: 'How does SMS work?', a: 'You buy SMS bundles in cedis and every message is counted against your church. Large churches can also connect their own SMS account.' },
+  { q: 'How do we pay?', a: 'Monthly by card, or by bank transfer or mobile money for 3, 6 or 12 months ahead. Paying for a year costs the price of 10 months.' },
+  { q: 'How does SMS work?', a: 'You buy SMS credit as you need it and every message is counted against your church. SMS is live in Ghana today, with more countries on the way. Email works everywhere, at no extra cost.' },
   { q: 'Can we move our existing records in?', a: 'Yes. Upload your member list from Excel or CSV and CareConnect matches the columns for you. On the Church and Network plans we do it with you.' },
   { q: 'What happens if we leave?', a: 'You can export everything your church owns at any time. When you close your account, your data is deleted for good.' },
 ];
