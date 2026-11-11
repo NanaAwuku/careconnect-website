@@ -21,7 +21,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="theme-color" content="#0d6e55" />
+    <meta name="theme-color" content="#141414" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://images.unsplash.com" />
@@ -34,7 +34,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <Footer />
 
     <script>
-      // Motion, all of it optional: fade into view, counters, feature tabs.
+      // Motion, all of it optional: fade into view, the rotating word, counters, feature tabs.
       const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       // Rise into view as they scroll in (once).
@@ -47,6 +47,24 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       const header = document.getElementById('site-header');
       const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 8);
       addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+      // The rotating word, and anything that changes with it: one clock, so they stay together.
+      const rotators = [...document.querySelectorAll('[data-rotate]')].map((r) => [...r.children]);
+      if (!reduce && rotators.length) {
+        let i = 0;
+        setInterval(() => {
+          rotators.forEach((items) => items[i % items.length].classList.remove('on'));
+          i += 1;
+          rotators.forEach((items) => items[i % items.length].classList.add('on'));
+        }, 2800);
+      }
+
+      // A live number that creeps up now and then, like a real Sunday morning.
+      document.querySelectorAll<HTMLElement>('[data-live]').forEach((el) => {
+        if (reduce) return;
+        let n = Number(el.dataset.live);
+        setInterval(() => { n += 1 + Math.floor(Math.random() * 3); el.textContent = n.toLocaleString('en-GH'); }, 1800);
+      });
 
       // Counters count up once visible.
       const countIo = new IntersectionObserver((entries) => {

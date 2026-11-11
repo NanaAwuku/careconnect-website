@@ -75,7 +75,10 @@ const input = 'mt-1.5 w-full rounded-xl border border-line bg-white px-4 py-3 te
   const form = document.getElementById('lead-form');
   const error = document.getElementById('lead-error');
   const done = document.getElementById('lead-done');
-  const plan = new URLSearchParams(location.search).get('plan');
+  const params = new URLSearchParams(location.search);
+  const plan = params.get('plan');
+  const church = params.get('church');
+  if (church) form.elements.churchName.value = church.slice(0, 120);
   if (plan) form.elements.plan.value = plan;
 
   const show = (msg) => { error.textContent = msg; error.classList.remove('hidden'); };

@@ -1,12 +1,12 @@
 ---
 // The opening of every inner page: one flat block of colour and a heavy headline.
-// `tone` picks the block: green (white type), gold or pale (dark type).
+// `tone` picks the block: dark (white type), gold or pale (dark type).
 // An optional picture goes in the "aside" slot; without one the hero is left-aligned and wide.
-interface Props { tone?: 'green' | 'gold' | 'pale'; lede?: string }
+interface Props { tone?: 'dark' | 'gold' | 'pale'; lede?: string }
 const { tone = 'pale', lede } = Astro.props;
 const hasAside = Astro.slots.has('aside');
-const bg = { green: 'bg-brand text-white', gold: 'bg-accent text-ink', pale: 'bg-brand-soft text-ink' }[tone];
-const ledeColour = tone === 'green' ? 'text-white/85' : 'text-ink/75';
+const bg = { dark: 'bg-ink text-white', gold: 'bg-accent text-ink', pale: 'bg-brand-soft text-ink' }[tone];
+const ledeColour = tone === 'dark' ? 'text-white/85' : 'text-ink/75';
 ---
 <section class={bg}>
   <div class={`container-page py-16 sm:py-24 ${hasAside ? 'grid items-center gap-14 lg:grid-cols-[1.05fr_1fr]' : ''}`}>

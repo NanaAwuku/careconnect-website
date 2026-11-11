@@ -2,23 +2,23 @@
 
 /* CareConnect's own brand — the product, not any church.
    One typeface (Schibsted Grotesk), heavy for headlines. One owned colour, used flat and big:
-   a deep green, with Ghana gold for the moments that matter. No gradients, no glows, no fake depth. */
+   a black-and-gold: near-black for type and action, Ghana gold for the moments that matter. No gradients, no glows, no fake depth. */
 @theme {
   --font-sans: "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: "Schibsted Grotesk", ui-sans-serif, system-ui, sans-serif;
 
-  --color-ink: #111a17;
-  --color-ink-soft: #4b5751;
-  --color-brand: #0d6e55;
-  --color-brand-dark: #08513e;
-  --color-brand-soft: #e3eee8;
+  --color-ink: #141414;
+  --color-ink-soft: #55534e;
+  --color-brand: #141414;
+  --color-brand-dark: #000000;
+  --color-brand-soft: #f5f2ea;
   --color-accent: #ffc72c;
-  --color-accent-dark: #a67800;
+  --color-accent-dark: #8a6200;
   --color-accent-soft: #fff1c7;
   --color-coral: #e5533d;
   --color-cream: #f4f2ec;
-  --color-mist: #f4f5f4;
-  --color-line: #dfe3e0;
+  --color-mist: #f7f6f3;
+  --color-line: #e4e1da;
 
   --animate-marquee: marquee 40s linear infinite;
   @keyframes marquee {
@@ -41,7 +41,7 @@ body { @apply bg-white font-sans text-ink antialiased; }
 .lede { @apply text-lg leading-relaxed text-ink-soft sm:text-xl; }
 
 .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-[15px] font-bold transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2; }
-.btn-primary { @apply bg-brand text-white hover:bg-brand-dark; }
+.btn-primary { @apply bg-ink text-white hover:bg-black; }
 .btn-ghost { @apply border-2 border-ink bg-transparent text-ink hover:bg-ink hover:text-white; }
 .btn-light { @apply bg-white text-ink hover:bg-accent; }
 .btn-accent { @apply bg-accent text-ink hover:bg-[#ffd659]; }
@@ -57,6 +57,15 @@ body { @apply bg-white font-sans text-ink antialiased; }
 .reveal-delay-1 { transition-delay: 0.08s; }
 .reveal-delay-2 { transition-delay: 0.16s; }
 .reveal-delay-3 { transition-delay: 0.24s; }
+
+/* The rotating word in the hero: each word sits on its own gold block, so the block resizes as it changes. */
+.rotator { display: inline-grid; justify-items: start; }
+.rotator > * { grid-area: 1 / 1; transition: opacity 0.45s, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+.rotator > *:not(.on) { opacity: 0; transform: translateY(0.35em); }
+
+/* Hero cards arrive once, one after the other (--d), then stay still. */
+.hero-pop { animation: hero-pop 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; }
+@keyframes hero-pop { from { opacity: 0; transform: translateY(18px) scale(0.96); } to { opacity: 1; transform: none; } }
 
 .marquee-mask { mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
 
