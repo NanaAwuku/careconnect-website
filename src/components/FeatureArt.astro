@@ -1,5 +1,5 @@
 ---
-// Drawn, not screenshotted: small, crisp pictures of what each part of CareConnect does.
+// Drawn, not screenshotted (until there are real screenshots of a demo church): small, crisp pictures of what each part of CareConnect does.
 // Names are invented. One picture per feature id (see data/site.ts), plus the hero dashboard.
 interface Props { kind: string }
 const { kind } = Astro.props;
@@ -12,11 +12,11 @@ const people = [
 ];
 ---
 <div class="relative">
-  <div aria-hidden="true" class="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-brand-soft via-white to-accent-soft"></div>
-  <div class="overflow-hidden rounded-2xl border border-line bg-white">
-    <div class="flex items-center gap-1.5 border-b border-line bg-mist px-4 py-2.5">
-      <span class="h-2.5 w-2.5 rounded-full bg-[#e5e7eb]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#e5e7eb]"></span><span class="h-2.5 w-2.5 rounded-full bg-[#e5e7eb]"></span>
-      <span class="ml-3 truncate text-[11px] text-ink-soft">gracechapel.careconnect.com</span>
+  <div class="overflow-hidden rounded-xl border border-line bg-white">
+    <div class="flex items-center gap-2.5 border-b border-line px-4 py-3">
+      <span class="flex h-6 w-6 items-center justify-center rounded-md bg-ink text-[10px] font-extrabold text-white">GC</span>
+      <span class="text-xs font-bold">Grace Chapel</span>
+      <span class="ml-auto flex h-6 w-6 items-center justify-center rounded-full bg-brand-soft text-[9px] font-bold text-brand-dark">AO</span>
     </div>
     <div class="p-4 sm:p-5">
 
@@ -124,8 +124,8 @@ const people = [
 
       {kind === 'insight' && (
         <div class="space-y-3">
-          <div class="ml-auto max-w-[85%] rounded-2xl rounded-br-md bg-brand px-3.5 py-2.5 text-xs text-white">How many first-timers came back this month?</div>
-          <div class="max-w-[90%] rounded-2xl rounded-bl-md bg-mist px-3.5 py-2.5 text-xs leading-relaxed">
+          <div class="ml-auto max-w-[85%] rounded-lg rounded-br-md bg-brand px-3.5 py-2.5 text-xs text-white">How many first-timers came back this month?</div>
+          <div class="max-w-[90%] rounded-lg rounded-bl-md bg-mist px-3.5 py-2.5 text-xs leading-relaxed">
             <b>14 of 37</b> first-timers this month have visited again (38%). The Friday chapel brought the most back: 5.
           </div>
           <div class="grid grid-cols-7 gap-1">{['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, i) => <div class="text-center"><div class="mx-auto mb-1 w-full rounded bg-brand/70" style={`height:${[18, 26, 22, 30, 44, 20, 36][i]}px`}></div><span class="text-[9px] text-ink-soft">{d}</span></div>)}</div>

@@ -1,23 +1,20 @@
 ---
-// The opening of every inner page: cream, two soft glows, a Fraunces headline.
-// Put the headline in the default slot (wrap the word that matters in .accent-word),
-// and an optional picture in the "aside" slot; without one the hero is centred.
-interface Props { eyebrow: string; lede?: string }
-const { eyebrow, lede } = Astro.props;
+// The opening of every inner page: one flat block of colour and a heavy headline.
+// `tone` picks the block: green (white type), gold or pale (dark type).
+// An optional picture goes in the "aside" slot; without one the hero is left-aligned and wide.
+interface Props { tone?: 'green' | 'gold' | 'pale'; lede?: string }
+const { tone = 'pale', lede } = Astro.props;
 const hasAside = Astro.slots.has('aside');
+const bg = { green: 'bg-brand text-white', gold: 'bg-accent text-ink', pale: 'bg-brand-soft text-ink' }[tone];
+const ledeColour = tone === 'green' ? 'text-white/85' : 'text-ink/75';
 ---
-<section class="relative overflow-hidden bg-cream">
-  <div aria-hidden="true" class="pointer-events-none absolute -right-40 -top-40 h-[30rem] w-[30rem] rounded-full bg-accent/25 blur-3xl"></div>
-  <div aria-hidden="true" class="pointer-events-none absolute -bottom-48 -left-32 h-[26rem] w-[26rem] rounded-full bg-brand/15 blur-3xl"></div>
-  <div class={`container-page relative py-16 sm:py-24 ${hasAside ? 'grid items-center gap-14 lg:grid-cols-[1.05fr_1fr]' : 'text-center'}`}>
+<section class={bg}>
+  <div class={`container-page py-16 sm:py-24 ${hasAside ? 'grid items-center gap-14 lg:grid-cols-[1.05fr_1fr]' : ''}`}>
     <div>
-      <p class="eyebrow reveal">
-        <span class="rounded-full bg-brand-soft px-3 py-1 normal-case tracking-normal text-brand-dark">{eyebrow}</span>
-      </p>
-      <h1 class={`h-display reveal reveal-delay-1 mt-6 ${hasAside ? '' : 'mx-auto max-w-4xl'}`}><slot /></h1>
-      {lede && <p class={`lede reveal reveal-delay-2 mt-6 ${hasAside ? 'max-w-xl' : 'mx-auto max-w-2xl'}`}>{lede}</p>}
-      <div class="reveal reveal-delay-3"><slot name="after" /></div>
+      <h1 class="h-display reveal max-w-4xl"><slot /></h1>
+      {lede && <p class={`reveal reveal-delay-1 mt-6 max-w-2xl text-lg leading-relaxed sm:text-xl ${ledeColour}`}>{lede}</p>}
+      <div class="reveal reveal-delay-2"><slot name="after" /></div>
     </div>
-    {hasAside && <div class="reveal reveal-delay-2"><slot name="aside" /></div>}
+    {hasAside && <div class="reveal reveal-delay-1"><slot name="aside" /></div>}
   </div>
 </section>

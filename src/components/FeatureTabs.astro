@@ -18,9 +18,9 @@ const icons: Record<string, string> = {
   <div role="tablist" aria-label="Features" class="space-y-2">
     {FEATURES.map((f, i) => (
       <button type="button" role="tab" data-tab id={`tab-${f.id}`} aria-controls={`panel-${f.id}`}
-        class="group block w-full rounded-3xl px-5 py-4 text-left transition-all duration-300 hover:bg-white [&.active]:bg-white [&.active]:shadow-[0_20px_40px_-28px_rgba(16,35,42,0.45)]">
+        class="group block w-full rounded-xl px-5 py-4 text-left transition-all duration-300 hover:bg-white [&.active]:bg-white">
         <span class="flex items-center gap-4">
-          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white text-ink-soft transition-colors group-[.active]:bg-brand group-[.active]:text-white">
+          <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-white text-ink-soft transition-colors group-[.active]:bg-brand group-[.active]:text-white">
             <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d={icons[f.id]} /></svg>
           </span>
           <span class="text-lg font-semibold">{f.title}</span>

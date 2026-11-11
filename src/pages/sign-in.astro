@@ -3,12 +3,10 @@ import Base from '../layouts/Base.astro';
 import { SITE } from '../data/site';
 ---
 <Base title="Sign in" description="Sign in to your church on CareConnect.">
-  <section class="relative overflow-hidden bg-cream">
-    <div aria-hidden="true" class="pointer-events-none absolute -right-40 -top-40 h-[30rem] w-[30rem] rounded-full bg-accent/25 blur-3xl"></div>
-    <div aria-hidden="true" class="pointer-events-none absolute -bottom-48 -left-32 h-[26rem] w-[26rem] rounded-full bg-brand/15 blur-3xl"></div>
+  <section class="bg-brand-soft">
     <div class="container-page relative flex min-h-[75vh] items-center justify-center py-16">
-      <div class="reveal w-full max-w-md rounded-[2rem] border border-line bg-white p-8 shadow-[0_30px_60px_-30px_rgba(16,35,42,0.35)] sm:p-10">
-        <h1 class="font-display text-4xl font-medium tracking-[-0.015em]">Sign in to your <span class="accent-word">church</span></h1>
+      <div class="reveal w-full max-w-md rounded-xl bg-white p-8 sm:p-10">
+        <h1 class="font-display text-4xl font-extrabold tracking-[-0.03em]">Sign in to your church</h1>
         <p class="mt-2 text-sm text-ink-soft">Each church on CareConnect has its own address. Enter your church's web name and we'll take you there.</p>
         <form id="go" class="mt-6">
           <label class="text-sm font-semibold" for="slug">Your church's web name</label>
