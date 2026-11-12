@@ -4,9 +4,12 @@
 
 export const SITE = {
   name: 'CareConnect',
+  /** What search engines and link previews call us: "CareConnect" alone is a Ghanaian home-care
+   *  company (careconnectgh.com), so everything Google reads says "CareConnect Church". The page itself says CareConnect. */
+  seoName: 'CareConnect Church',
   tagline: 'Church management for every member and every visitor',
   description:
-    'Church management software that helps you know every member, follow up every first-timer and reach everyone by SMS and email. Groups, visitation, attendance and programmes in one system. Free under 100 members.',
+    'CareConnect Church is church management software that helps you know every member, follow up every first-timer and reach everyone by SMS and email. Groups, visitation, attendance and programmes in one system. Free under 100 members.',
   email: 'hello@careconnectgh.org',
   phone: '+233 00 000 0000',
   /** Where churches sign in: <their web name>.<appDomain> */
