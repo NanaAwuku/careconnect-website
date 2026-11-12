@@ -27,7 +27,7 @@ import { SITE } from '../data/site';
   const form = document.getElementById('go');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const slug = form.elements.slug.value.trim().toLowerCase().replace(/\.careconnect\.com.*$/, '');
+    const slug = form.elements.slug.value.trim().toLowerCase().replace(/^https?:\/\//, '').split('.')[0];
     if (!/^[a-z0-9](?:[a-z0-9-]{0,38}[a-z0-9])?$/.test(slug)) { document.getElementById('go-error').classList.remove('hidden'); return; }
     location.href = `https://${slug}.${domain}/login`;
   });

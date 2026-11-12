@@ -7,10 +7,10 @@ export const SITE = {
   tagline: 'Church management for every member and every visitor',
   description:
     'CareConnect helps churches know every member, follow up every visitor and reach everyone by SMS and email. Members and groups, first-timers and visitation, attendance, events and programmes in one simple system.',
-  email: 'hello@careconnect.com',
+  email: 'hello@careconnectgh.org',
   phone: '+233 00 000 0000',
   /** Where churches sign in: <their web name>.<appDomain> */
-  appDomain: 'careconnect.com',
+  appDomain: 'careconnectgh.org',
   /** The backend's public URL, for the request-access form. */
   apiUrl: import.meta.env.PUBLIC_API_URL || 'http://localhost:4000',
 };
@@ -118,14 +118,14 @@ export const FEATURES: Feature[] = [
 
 export const STEPS = [
   { title: 'Request access', body: 'Tell us about your church. We reply within a working day.' },
-  { title: 'Your church is set up', body: 'Your name, logo and colours, at yourchurch.careconnect.com.' },
+  { title: 'Your church is set up', body: 'Your name, logo and colours, at yourchurch.careconnectgh.org.' },
   { title: 'Bring your members', body: 'Import your list from Excel. We help you with it on the Church and Network plans.' },
   { title: 'Invite your team', body: 'Pastors, shepherds and administrators each see what their role needs.' },
 ];
 
 export const FAQS = [
   { q: 'Is our data separate from other churches?', a: 'Yes. Every church has its own address, its own people and its own data. No church can see another church\'s members, messages or reports — this is enforced on every request, and tested.' },
-  { q: 'Can we use our own domain?', a: 'Yes. Every church gets yourchurch.careconnect.com straight away, and on the Church plan you can also use your own domain, like app.yourchurch.org.' },
+  { q: 'Can we use our own domain?', a: 'Yes. Every church gets yourchurch.careconnectgh.org straight away, and on the Church plan you can also use your own domain, like app.yourchurch.org.' },
   { q: 'How do we pay?', a: 'Monthly by card, or by bank transfer or mobile money for 3, 6 or 12 months ahead. Paying for a year costs the price of 10 months.' },
   { q: 'How does SMS work?', a: 'You buy SMS credit as you need it and every message is counted against your church. SMS is live in Ghana today, with more countries on the way. Email works everywhere, at no extra cost.' },
   { q: 'Can we move our existing records in?', a: 'Yes. Upload your member list from Excel or CSV and CareConnect matches the columns for you. On the Church and Network plans we do it with you.' },
