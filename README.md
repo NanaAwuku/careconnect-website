@@ -31,7 +31,7 @@ is set.
 ## Deploy (Vercel)
 
 1. New Vercel project from this repo (framework: Astro, output `dist`).
-2. Settings: `PUBLIC_API_URL` = the backend's public URL, `SITE_URL` = `https://careconnectgh.org`.
+2. Settings: `PUBLIC_API_URL` = the backend's public URL, `SITE_URL` = `https://www.careconnectgh.org`.
 3. Domains: `careconnectgh.org` and `www.careconnectgh.org` on this project.
 
 ## Before launch
