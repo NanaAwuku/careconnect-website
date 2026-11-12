@@ -6,7 +6,7 @@ export const SITE = {
   name: 'CareConnect',
   tagline: 'Church management for every member and every visitor',
   description:
-    'CareConnect helps churches know every member, follow up every visitor and reach everyone by SMS and email. Members and groups, first-timers and visitation, attendance, events and programmes in one simple system.',
+    'Church management software that helps you know every member, follow up every first-timer and reach everyone by SMS and email. Groups, visitation, attendance and programmes in one system. Free under 100 members.',
   email: 'hello@careconnectgh.org',
   phone: '+233 00 000 0000',
   /** Where churches sign in: <their web name>.<appDomain> */

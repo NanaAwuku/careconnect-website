@@ -2,11 +2,34 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE } from '../data/site';
-interface Props { title?: string; description?: string }
-const { title, description = SITE.description } = Astro.props;
-const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name}: ${SITE.tagline}`;
+import { SITE, PLANS } from '../data/site';
+interface Props { title?: string; description?: string; noindex?: boolean }
+const { title, description = SITE.description, noindex = false } = Astro.props;
+// The home page's title carries the words people search for; other pages lead with their own subject.
+const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name}: Church Management Software for Members, Visitors and Follow-up`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og-image.png', Astro.site);
+const isHome = Astro.url.pathname === '/';
+
+// Structured data: tells search engines who we are and what CareConnect is, with real prices.
+const site = Astro.site!.origin;
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'Organization', name: SITE.name, url: `${site}/`, logo: `${site}/icon-512.png`, email: SITE.email },
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: `${site}/` },
+  ...(isHome || Astro.url.pathname.startsWith('/pricing') ? [{
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: SITE.name,
+    applicationCategory: 'BusinessApplication',
+    applicationSubCategory: 'Church management software',
+    operatingSystem: 'Web browser',
+    url: `${site}/`,
+    description: SITE.description,
+    offers: PLANS.filter((p) => p.monthly !== null).map((p) => ({
+      '@type': 'Offer', name: p.name, price: p.monthly, priceCurrency: 'USD', description: p.members,
+    })),
+  }] : []),
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -16,11 +39,25 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="CareConnect: care for every member and every visitor" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <meta name="theme-color" content="#141414" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
